@@ -1,0 +1,84 @@
+html,body,#wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+ 
+.chart {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+}
+ 
+.axis path,.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+ 
+.bar {
+	fill: #CECECE;
+	opacity:0.5;
+}
+ 
+.bar-failed {
+	fill: #DDE0DD;
+}
+ 
+.bar-running {
+	fill: #669900;
+}
+ 
+.bar-succeeded {
+	fill: #33b5e5;
+}
+ 
+.bar-killed {
+	fill: #ffbb33;
+}
+
+.parent.progress{
+	fill: #CECECE;
+}
+
+.subtask{
+	fill: #2CDC29;
+	opacity:0.5;
+}
+
+.subtask.progress{
+	fill:red;
+	
+}
+ 
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.grid path {
+      stroke-width: 0;
+}
+
+.y.axis  line{
+  stroke-opacity: .2;
+  stroke: black;
+  stroke-dasharray: 10,2
+}
+
+.x.axis.days  line{
+  stroke-opacity: .6;
+  stroke: azure;
+  stroke-dasharray: 10,2
+}
+
+
+.x.axis.weekend  line{
+  stroke-opacity: .3;
+  stroke-width: 10px;
+  stroke-dasharray: 10,2
+}
+
+.x.axis.today  line{
+  stroke-opacity: .8;
+  stroke-width: 3px;
+  stroke: #7AFF96;
+}
