@@ -152,3 +152,11 @@ var yKeys = tasks.map(function(a) {return a.subtask;});
 
 var gantt = d3.gantt().workDayOfSprint(9).taskTypes(yKeys);
 gantt(tasks);
+
+
+function updateData(){
+    d3.selectAll("svg").remove();
+    gantt = d3.gantt().workDayOfSprint(9).taskTypes(yKeys);
+    gantt(tasks);
+    return false;
+}
