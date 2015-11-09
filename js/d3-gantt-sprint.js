@@ -17,7 +17,7 @@ d3.gantt = function() {
     var taskTypes = [];
     var taskStatus = [];
     var height = document.body.clientHeight - margin.top - margin.bottom-5;
-    height = Math.min(600,height);
+    height = Math.max(600,height);
     console.log(height);
     var width = document.body.clientWidth - margin.right - margin.left-5;
     var x, y, ySubtasksAxis,yDevsAxis, xAxis, xAxisWeekend, xAxisToday;
