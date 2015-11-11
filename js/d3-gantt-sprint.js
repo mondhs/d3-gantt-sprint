@@ -13,7 +13,9 @@ d3.gantt = function() {
 	bottom : 20,
 	left : 150
     };
-
+	
+	var totalDaysOfSprint = 13;
+	var ticketUrl = "https://google.com/";
     var taskTypes = [];
     var taskStatus = [];
     var height = document.body.clientHeight - margin.top - margin.bottom-5;
@@ -42,10 +44,10 @@ d3.gantt = function() {
 
 
     var initAxis = function() {
-		x = d3.scale.linear().domain([0, 13]).range([0, width]);
+		x = d3.scale.linear().domain([0, totalDaysOfSprint]).range([0, width]);
 		y = d3.scale.ordinal().domain(taskTypes).rangeRoundBands([ 0, height - margin.top - margin.bottom ], .1);
 		xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(-height, 0, 0);
-		xAxisWeekend = d3.svg.axis().scale(x).orient("bottom").tickValues([4,9]).tickSize(-height, 0, 0).tickFormat("");
+		xAxisWeekend = d3.svg.axis().scale(x).orient("bottom").tickValues([4,9,14]).tickSize(-height, 0, 0).tickFormat("");
 		xAxisToday = d3.svg.axis().scale(x).orient("bottom").tickValues([workDayOfSprint-0.5]).tickSize(-height, 0, 0).tickFormat(function(d, i){
     		return new Date().toISOString().slice(0, 10);
 
@@ -95,7 +97,7 @@ d3.gantt = function() {
 	 .attr("width", parentWidhFunction)
 	 .on("click", function(d) {
   		console.log("rect: " +d.parent);
-  		window.open("https://google.com/"+d.parent); 
+  		window.open(ticketUrl+d.parent); 
   		d3.event.stopPropagation();
 	  });
 
@@ -138,7 +140,7 @@ d3.gantt = function() {
     })
     .on("click", function(d) {
   		console.log("rect: " +d.subtask);
-  		window.open("https://google.com/"+d.subtask); 
+  		window.open(ticketUrl+d.subtask); 
   		d3.event.stopPropagation();
 	  });
 
@@ -222,7 +224,13 @@ d3.gantt = function() {
 	return gantt;
     };
 
-;
+    gantt.ticketUrl = function(value) {
+	if (!arguments.length)
+	    return ticketUrl;
+	ticketUrl = value;
+	return gantt;
+    };
+
 
     gantt.workDayOfSprint = function(value) {
 	if (!arguments.length)
@@ -231,6 +239,12 @@ d3.gantt = function() {
 	return gantt;
     };
 
+    gantt.totalDaysOfSprint = function(value) {
+	if (!arguments.length)
+	    return workDayOfSprint;
+	totalDaysOfSprint = value;
+	return gantt;
+    };
     
     return gantt;
 };
