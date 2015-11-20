@@ -141,6 +141,7 @@ var tasks =
     }
 ];
 
+
 var taskStatus = {
     "SUCCEEDED" : "bar",
     "FAILED" : "bar-failed",
@@ -150,18 +151,18 @@ var taskStatus = {
 
 var yKeys = tasks.map(function(a) {return a.subtask;});
 
-var gantt = d3.gantt().workDayOfSprint(9).taskTypes(yKeys);
-    var gantt = d3.gantt()
-        .ticketUrl("https://github.com/mondhs/espeak/issues/")
-        .workDayOfSprint(10)
-        .totalDaysOfSprint(19)
-        .taskTypes(yKeys);
-gantt(tasks);
+
 
 
 function updateData(){
     d3.selectAll("svg").remove();
-    gantt = d3.gantt().workDayOfSprint(9).taskTypes(yKeys);
+    var gantt = d3.gantt()
+        .ticketUrl("https://github.com/mondhs/espeak/issues/")
+        .workDayOfSprint(2)
+        .totalDaysOfSprint(19)
+        .taskTypes(yKeys);
     gantt(tasks);
     return false;
 }
+
+updateData();
