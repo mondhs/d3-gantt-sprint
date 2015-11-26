@@ -133,7 +133,7 @@ d3.gantt = function() {
     });
 	 
 	 bar.append("text")
-                 .text( function (d) { if(typeof d.devAvatar  !== "undefined"){return "";}return d.developer; })
+                 .text( function (d) { if(typeof d.avatar  !== "undefined"){return "";}return d.developer; })
                  .attr("dx", function(){
                  	//debugger;
                  	return -this.getBBox().width})
@@ -146,7 +146,7 @@ d3.gantt = function() {
 		   .attr('y',-12)
 		   .attr('width', 40)
 		   .attr('height', 44)
-		   .attr("xlink:href",function(d){return d.devAvatar})
+		   .attr("xlink:href",function(d){return d.avatar})
 
       	
 	 //// Full subtask
