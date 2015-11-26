@@ -33,18 +33,27 @@ d3.gantt = function() {
 
     var rectTransform = function(d) {
     	var startDay = workDayOfSprint-sec2day(d.parentSpentSec);
-    	console.log("[rectTransform]startDate(will return 0 if negative): " + startDay + " for " + d.subtask);
+    	console.log("[rectTransform]startDate: " + startDay + " for " + d.subtask);
     	startDate = Math.max(0,startDay);
 		return "translate(" + x(startDay) + "," + y(d.subtask) + ")";
     };
 
+    var getParentDaysTillCommitment= function(d){
+    	var parentDaysTillCommitment = 0
+    	if(typeof d.parentDaysTillCommitment  !== "undefined"){
+			parentDaysTillCommitment = Math.max(parentDaysTillCommitment,d.parentDaysTillCommitment);
+    	}
+    	return parentDaysTillCommitment;
+    }
+
     var parentWidhFunction = function(d){
-    	var parentDaysTillCommitment = Math.max(0,d.parentDaysTillCommitment);
+    	var parentDaysTillCommitment = getParentDaysTillCommitment(d);
+    	
     	var startDay = 0+workDayOfSprint;
     	var estimatedEndDay = sec2day(d.parentSpentSec)+parentDaysTillCommitment + workDayOfSprint;
-
+		//console.log("[parentWidhFunction]d.parentSpentSec: " +d.parentSpentSec + "; d.parentDaysTillCommitment=" + d.parentDaysTillCommitment+";workDayOfSprint=" + workDayOfSprint)
     	console.log("[parentWidhFunction]startDate: " + startDay + " and estimatedEndDay:" + estimatedEndDay + " for " + d.subtask);
-    	//console.log("[parentWidhFunction]d.parentDaysTillCommitment(negative==0): " + d.parentDaysTillCommitment + " and sec2day(d.parentSpentSec):" + sec2day(d.parentSpentSec) + " for " + d.subtask);
+    	
     	return x(estimatedEndDay)-x(startDay); 
     }
 
@@ -115,7 +124,7 @@ d3.gantt = function() {
 	 .attr("y",y.rangeBand()-niceMargin*4)
 	 .attr("height", function(d) { return(niceMargin*2); })
 	 .attr("width", function(d){
-	 	var parentDaysTillCommitment = Math.max(d.parentDaysTillCommitment,0);
+	 	var parentDaysTillCommitment = getParentDaysTillCommitment(d);
     	var startDay = 0+workDayOfSprint;
     	var estimatedEndDay = sec2day(d.parentSpentSec)+parentDaysTillCommitment + workDayOfSprint;
     	var progress = (d.parentSpentSec/d.parentEstimateSec);

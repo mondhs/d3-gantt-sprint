@@ -142,6 +142,7 @@ var tasks =
 ];
 
 
+
 var taskStatus = {
     "SUCCEEDED" : "bar",
     "FAILED" : "bar-failed",
@@ -158,7 +159,7 @@ function updateData(){
     d3.selectAll("svg").remove();
     var gantt = d3.gantt()
         .ticketUrl("https://github.com/mondhs/espeak/issues/")
-        .workDayOfSprint(2)
+        .workDayOfSprint(8)
         .totalDaysOfSprint(19)
         .taskTypes(yKeys);
     gantt(tasks);
